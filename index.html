@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Services Hub | Live Executive</title>
+    <title>National Services Portal | Live Executive</title>
     
     <!-- Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,7 @@
         .brand-font { font-family: 'Outfit', sans-serif; }
         .header-font { font-family: 'Poppins', sans-serif; }
 
-        /* Animated Mesh Background */
+        /* Background Animation */
         .mesh-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
@@ -39,7 +39,7 @@
         .carousel-container { position: relative; width: 100%; overflow: hidden; padding: 20px 0; }
         .carousel-track { display: flex; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1); gap: 24px; padding: 0 40px; }
         .carousel-item {
-            min-width: 380px; height: 200px; background: white;
+            min-width: 380px; height: 180px; background: white;
             border: 1px solid #e4e4e7; border-radius: 28px; padding: 24px;
             transition: all 0.5s ease; display: flex; flex-direction: column; justify-content: space-between;
         }
@@ -47,35 +47,25 @@
         .carousel-dot { width: 8px; height: 8px; background: #e4e4e7; border-radius: 50%; transition: 0.3s; }
         .carousel-dot.active { width: 24px; background: var(--accent); border-radius: 10px; }
 
-        /* Hero Styling */
+        /* Hero & Cards */
         .hero-box { background: var(--zinc-dark); border-radius: 48px; position: relative; overflow: hidden; }
-        .hero-glow {
-            position: absolute; top: -20%; right: -10%; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
-            filter: blur(80px); pointer-events: none;
-        }
-
-        /* Card Styling */
         .resource-card {
             background: white; border: 1px solid #e4e4e7; border-radius: 32px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .resource-card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.05); }
+        .resource-card:hover { transform: translateY(-12px); border-color: var(--accent); }
 
-        /* Social Icons (Canva Style) */
+        /* Weather UI Animation */
+        .weather-icon-anim { animation: pulseIcon 3s ease-in-out infinite; }
+        @keyframes pulseIcon { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.8; } }
+
+        /* Footer Icons */
         .social-btn {
             width: 44px; height: 44px; background: white; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: var(--footer-bg); font-size: 1.2rem; transition: 0.3s;
         }
         .social-btn:hover { transform: scale(1.15); filter: brightness(0.9); }
-
-        /* Weather Icon Animation */
-        .weather-icon-anim { animation: float 3s ease-in-out infinite; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
@@ -84,19 +74,17 @@
 
     <div class="mesh-bg"></div>
 
-    <!-- Navigation Bar (Scrollable) -->
+    <!-- Navigation (Fully Scrollable) -->
     <nav class="bg-white border-b border-slate-100 relative z-50">
         <div class="max-w-[1440px] mx-auto px-8 py-6 flex items-center justify-between gap-10 overflow-x-auto no-scrollbar">
-            
             <div class="flex items-center gap-6 flex-shrink-0">
-                <img src="https://i.ibb.co/h1wyr15h/7197-removebg-preview.png" alt="Logo" class="h-16 md:h-20 w-auto">
+                <img src="https://i.ibb.co/h1wyr15h/7197-removebg-preview.png" alt="Portal Logo" class="h-16 md:h-20 w-auto">
                 <div class="h-12 w-[1px] bg-zinc-100"></div>
                 <div class="flex flex-col">
                     <span class="header-font text-2xl md:text-3xl font-black text-zinc-900 tracking-tight leading-none">Services</span>
                     <span class="header-font text-2xl md:text-3xl font-black text-indigo-600 leading-tight">Portal</span>
                 </div>
             </div>
-            
             <div class="flex items-center gap-10 flex-shrink-0">
                 <div class="text-right border-r border-zinc-100 pr-10 hidden sm:block">
                     <div id="clock" class="text-3xl md:text-4xl font-bold text-zinc-950 tabular-nums tracking-tighter">00:00:00</div>
@@ -111,69 +99,52 @@
 
     <main class="max-w-[1440px] mx-auto px-8 pt-12">
         
-        <!-- Enhanced Hero Section with Weather -->
+        <!-- Hero Section -->
         <section class="hero-box relative px-10 md:px-20 py-24 text-white mb-16 shadow-2xl">
-            <div class="hero-glow"></div>
             <div class="relative z-10 flex flex-col lg:flex-row items-center gap-16">
                 <div class="flex-1">
                     <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 mb-8">
                         <span class="w-2 h-2 bg-indigo-400 rounded-full animate-ping"></span>
-                        <span class="text-[10px] font-black uppercase tracking-widest">National Digital Infrastructure</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest">Live Cloud Network</span>
                     </div>
-
-                    <h1 class="brand-font text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tight">
-                        Your Digital <br>
-                        <span class="bg-gradient-to-r from-indigo-400 to-blue-300 bg-clip-text text-transparent">Gateway to Hub</span>
-                    </h1>
-                    
+                    <h1 class="brand-font text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tight">Your Digital <br><span class="bg-gradient-to-r from-indigo-400 to-blue-300 bg-clip-text text-transparent">Gateway to Hub</span></h1>
                     <div class="relative group max-w-2xl mb-8">
                         <i class="fa-solid fa-magnifying-glass absolute left-6 top-1/2 -translate-y-1/2 text-zinc-500 text-xl"></i>
-                        <input type="text" id="searchInput" 
-                            placeholder="Search resources (Voter ID, Banking, Aadhaar...)" 
-                            class="w-full bg-white text-zinc-900 rounded-[24px] pl-16 pr-24 py-6 text-xl outline-none shadow-2xl focus:ring-[8px] focus:ring-indigo-500/20 transition-all font-medium">
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3">
-                        <button onclick="quickSearch('Voter ID')" class="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold hover:bg-indigo-600 transition-all">Voter ID</button>
-                        <button onclick="quickSearch('Banking')" class="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold hover:bg-indigo-600 transition-all">Finance</button>
-                        <button onclick="quickSearch('Education')" class="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold hover:bg-indigo-600 transition-all">Scholarships</button>
+                        <input type="text" id="searchInput" placeholder="Search resources (Voter ID, Banking, Aadhaar...)" class="w-full bg-white text-zinc-900 rounded-[24px] pl-16 pr-6 py-6 text-xl outline-none shadow-2xl focus:ring-[8px] focus:ring-indigo-500/20 transition-all font-medium">
                     </div>
                 </div>
 
-                <!-- Bento Stats & Weather Card -->
+                <!-- Bento Stats with Permanent Weather -->
                 <div class="hidden lg:grid grid-cols-2 gap-4 w-[450px]">
                     <div class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg text-center">
                         <p class="text-3xl font-extrabold text-indigo-400 mb-1" id="stat-total-hero">0</p>
-                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Active Portals</p>
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Active Services</p>
                     </div>
                     
-                    <!-- Weather Card (IP Based) -->
+                    <!-- Weather Card: Optimized to Always Show -->
                     <div class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg flex flex-col items-center justify-center text-center">
                         <div class="flex items-center gap-3 mb-1">
-                            <i id="weather-icon" class="fa-solid fa-cloud-sun text-3xl text-amber-400 weather-icon-anim"></i>
-                            <p class="text-3xl font-extrabold text-white" id="weather-temp">--°</p>
+                            <i id="w-icon" class="fa-solid fa-sun text-3xl text-amber-400 weather-icon-anim"></i>
+                            <p class="text-3xl font-extrabold text-white" id="w-temp">--°</p>
                         </div>
-                        <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest truncate w-full" id="weather-location">Detecting...</p>
+                        <p class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest truncate w-full" id="w-loc">Initializing...</p>
                     </div>
 
                     <div class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg col-span-2 flex items-center justify-between">
-                        <div>
-                            <p class="text-xl font-extrabold text-blue-400">Live Services</p>
-                            <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Global Cloud Sync Active</p>
-                        </div>
-                        <i class="fa-solid fa-shield-halved text-3xl text-zinc-700"></i>
+                        <p class="text-xl font-extrabold text-blue-400">Verified Access</p>
+                        <i class="fa-solid fa-shield-check text-3xl text-zinc-700"></i>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Corcal Carousel Section -->
-        <div class="mb-20">
-            <div class="flex justify-between items-end mb-8 px-4">
+        <!-- Featured Carousel -->
+        <div class="mb-20 px-4">
+            <div class="flex justify-between items-end mb-8">
                 <h2 class="brand-font text-3xl font-bold">Featured Portals</h2>
                 <div class="flex gap-3">
-                    <button onclick="moveCarousel(-1)" class="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-100"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button onclick="moveCarousel(1)" class="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-100"><i class="fa-solid fa-arrow-right"></i></button>
+                    <button onclick="moveCarousel(-1)" class="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-100 transition-all"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button onclick="moveCarousel(1)" class="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-100 transition-all"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
             <div class="carousel-container"><div class="carousel-track" id="carouselTrack"></div></div>
@@ -183,7 +154,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10" id="resourceGrid"></div>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (Canva Inspired) -->
     <footer style="background-color: var(--footer-bg);" class="mt-24 pt-20 pb-12 text-white">
         <div class="max-w-[1440px] mx-auto flex flex-col items-center">
             <div class="flex items-center gap-5 mb-16">
@@ -192,13 +163,14 @@
                 <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
                 <a href="#" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
             </div>
-            <div class="flex flex-col items-center gap-5 mb-20 text-sm font-bold opacity-80">
+            <div class="flex flex-col items-center gap-4 mb-20 text-sm font-bold opacity-80 uppercase tracking-widest">
                 <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> <a href="#">Cookie Policy</a>
             </div>
             <p class="text-[13px] font-semibold opacity-90">© 2026 National Services Hub • Official Directory</p>
         </div>
     </footer>
 
+    <!-- Firebase & Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
@@ -217,45 +189,46 @@
         let allPortals = [];
         let cIdx = 0;
 
-        function updateClock() {
+        // Clock Update
+        setInterval(() => {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
             document.getElementById('date').innerText = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
-        }
-        setInterval(updateClock, 1000); updateClock();
+        }, 1000);
 
-        // --- FIXED WEATHER LOGIC (IP BASED) ---
-        async function fetchWeather() {
-            const locText = document.getElementById('weather-location');
-            const tempText = document.getElementById('weather-temp');
-            const icon = document.getElementById('weather-icon');
+        // --- ENHANCED WEATHER LOGIC ---
+        async function runWeather() {
+            const locEl = document.getElementById('w-loc');
+            const tempEl = document.getElementById('w-temp');
+            const iconEl = document.getElementById('w-icon');
+
+            const setWeatherUI = (city, temp, code) => {
+                locEl.innerText = city;
+                tempEl.innerText = Math.round(temp) + "°";
+                if(code === 0) iconEl.className = "fa-solid fa-sun text-3xl text-amber-400 weather-icon-anim";
+                else if(code < 4) iconEl.className = "fa-solid fa-cloud-sun text-3xl text-amber-300 weather-icon-anim";
+                else iconEl.className = "fa-solid fa-cloud text-3xl text-zinc-400 weather-icon-anim";
+            };
 
             try {
-                // Get Location via IP (No permission needed)
+                // Try IP Location
                 const ipRes = await fetch('https://ipapi.co/json/');
+                if(!ipRes.ok) throw new Error();
                 const ipData = await ipRes.json();
-                const city = ipData.city || "New Delhi";
-                const lat = ipData.latitude;
-                const lon = ipData.longitude;
-
-                // Get Weather via Open-Meteo
-                const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
-                const wData = await wRes.json();
                 
-                tempText.innerText = Math.round(wData.current_weather.temperature) + "°C";
-                locText.innerText = city;
-
-                const code = wData.current_weather.weathercode;
-                if(code === 0) icon.className = "fa-solid fa-sun text-3xl text-amber-400 weather-icon-anim";
-                else if(code < 4) icon.className = "fa-solid fa-cloud-sun text-3xl text-amber-300 weather-icon-anim";
-                else icon.className = "fa-solid fa-cloud text-3xl text-zinc-400 weather-icon-anim";
+                const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${ipData.latitude}&longitude=${ipData.longitude}&current_weather=true`);
+                const wData = await wRes.json();
+                setWeatherUI(ipData.city, wData.current_weather.temperature, wData.current_weather.weathercode);
             } catch (e) {
-                locText.innerText = "Guwahati, IN";
-                tempText.innerText = "28°C";
+                // DEFAULT FALLBACK (Guwahati)
+                const fallbackW = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=26.1445&longitude=91.7362&current_weather=true`);
+                const fData = await fallbackW.json();
+                setWeatherUI("Guwahati, IN", fData.current_weather.temperature, fData.current_weather.weathercode);
             }
         }
-        fetchWeather();
+        runWeather();
 
+        // Firebase Sync
         onValue(portalsRef, (snapshot) => {
             const data = snapshot.val();
             allPortals = data ? Object.entries(data).map(([id, val]) => ({ id, ...val })) : [];
@@ -264,15 +237,12 @@
             renderGrid();
         });
 
-        window.quickSearch = (t) => { document.getElementById('searchInput').value = t; renderGrid(); };
-
         function renderCarousel() {
             const track = document.getElementById('carouselTrack');
             const dots = document.getElementById('carouselDots');
-            const featured = allPortals.slice(0, 5); 
-            if(featured.length === 0) return;
-
-            track.innerHTML = featured.map((p, i) => `
+            const items = allPortals.slice(0, 5); 
+            if(items.length === 0) return;
+            track.innerHTML = items.map((p, i) => `
                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
                     <div class="flex justify-between">
                         <img src="https://www.google.com/s2/favicons?domain=${new URL(p.url).hostname}&sz=64" class="w-10 h-10 p-1 bg-zinc-50 rounded-lg">
@@ -281,7 +251,7 @@
                     <div><h3 class="brand-font text-lg font-bold mb-1">${p.name}</h3><p class="text-[11px] text-zinc-400 line-clamp-2">${p.desc}</p></div>
                 </div>
             `).join('');
-            dots.innerHTML = featured.map((_, i) => `<div class="carousel-dot ${i === 0 ? 'active' : ''}"></div>`).join('');
+            dots.innerHTML = items.map((_, i) => `<div class="carousel-dot ${i === 0 ? 'active' : ''}"></div>`).join('');
         }
 
         window.moveCarousel = (dir) => {
@@ -289,6 +259,7 @@
             cIdx = (cIdx + dir + items.length) % items.length;
             document.getElementById('carouselTrack').style.transform = `translateX(-${cIdx * (380 + 24)}px)`;
             document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === cIdx));
+            document.querySelectorAll('.carousel-item').forEach((item, i) => item.classList.toggle('active', i === cIdx));
         };
 
         function renderGrid() {
