@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Services Hub | Executive Directory</title>
+    <title>National Services Hub | Live Executive</title>
     
     <!-- Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,7 +14,7 @@
         :root {
             --accent: #4f46e5;
             --zinc-dark: #09090b;
-            --footer-bg: #4b5563; /* Canva-style grey-blue */
+            --footer-bg: #4b5563; 
         }
 
         body { 
@@ -35,14 +35,9 @@
                         radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.03) 0px, transparent 50%);
         }
 
-        /* Carousel (Corcal) Styles */
+        /* Carousel Styles */
         .carousel-container { position: relative; width: 100%; overflow: hidden; padding: 20px 0; }
-        .carousel-track {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-            gap: 24px;
-            padding: 0 40px;
-        }
+        .carousel-track { display: flex; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1); gap: 24px; padding: 0 40px; }
         .carousel-item {
             min-width: 380px; height: 200px; background: white;
             border: 1px solid #e4e4e7; border-radius: 28px; padding: 24px;
@@ -55,9 +50,9 @@
         /* Hero Styling */
         .hero-box { background: var(--zinc-dark); border-radius: 48px; position: relative; overflow: hidden; }
         .hero-glow {
-            position: absolute; top: -20%; right: -10%; width: 500px; height: 500px;
+            position: absolute; top: -20%; right: -10%; width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
-            filter: blur(60px); pointer-events: none;
+            filter: blur(80px); pointer-events: none;
         }
 
         /* Card Styling */
@@ -75,6 +70,13 @@
         }
         .social-btn:hover { transform: scale(1.15); filter: brightness(0.9); }
 
+        /* Weather Icon Animation */
+        .weather-icon-anim { animation: float 3s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -87,7 +89,7 @@
         <div class="max-w-[1440px] mx-auto px-8 py-6 flex items-center justify-between gap-10 overflow-x-auto no-scrollbar">
             
             <div class="flex items-center gap-6 flex-shrink-0">
-                <img src="https://i.ibb.co/h1wyr15h/7197-removebg-preview.png" alt="Digital India" class="h-16 md:h-20 w-auto">
+                <img src="https://i.ibb.co/h1wyr15h/7197-removebg-preview.png" alt="Logo" class="h-16 md:h-20 w-auto">
                 <div class="h-12 w-[1px] bg-zinc-100"></div>
                 <div class="flex flex-col">
                     <span class="header-font text-2xl md:text-3xl font-black text-zinc-900 tracking-tight leading-none">Services</span>
@@ -109,14 +111,14 @@
 
     <main class="max-w-[1440px] mx-auto px-8 pt-12">
         
-        <!-- Enhanced Hero Section -->
+        <!-- Enhanced Hero Section with Weather -->
         <section class="hero-box relative px-10 md:px-20 py-24 text-white mb-16 shadow-2xl">
             <div class="hero-glow"></div>
             <div class="relative z-10 flex flex-col lg:flex-row items-center gap-16">
                 <div class="flex-1">
                     <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 mb-8">
                         <span class="w-2 h-2 bg-indigo-400 rounded-full animate-ping"></span>
-                        <span class="text-[10px] font-black uppercase tracking-widest">Official Resource Directory</span>
+                        <span class="text-[10px] font-black uppercase tracking-widest">National Digital Infrastructure</span>
                     </div>
 
                     <h1 class="brand-font text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tight">
@@ -124,7 +126,6 @@
                         <span class="bg-gradient-to-r from-indigo-400 to-blue-300 bg-clip-text text-transparent">Gateway to Hub</span>
                     </h1>
                     
-                    <!-- Spotlight Search -->
                     <div class="relative group max-w-2xl mb-8">
                         <i class="fa-solid fa-magnifying-glass absolute left-6 top-1/2 -translate-y-1/2 text-zinc-500 text-xl"></i>
                         <input type="text" id="searchInput" 
@@ -135,7 +136,6 @@
                         </div>
                     </div>
 
-                    <!-- Discovery Chips -->
                     <div class="flex flex-wrap items-center gap-3">
                         <button onclick="quickSearch('Voter ID')" class="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold hover:bg-indigo-600 transition-all">Voter ID</button>
                         <button onclick="quickSearch('Banking')" class="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold hover:bg-indigo-600 transition-all">Finance</button>
@@ -143,15 +143,30 @@
                     </div>
                 </div>
 
-                <!-- Bento Stats -->
-                <div class="hidden lg:grid grid-cols-2 gap-4 w-[400px]">
+                <!-- Bento Stats & Weather Card -->
+                <div class="hidden lg:grid grid-cols-2 gap-4 w-[450px]">
+                    <!-- Total Portals -->
                     <div class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg">
                         <p class="text-3xl font-extrabold text-indigo-400 mb-1" id="stat-total-hero">0</p>
                         <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Active Portals</p>
                     </div>
-                    <div class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg">
-                        <p class="text-3xl font-extrabold text-blue-400 mb-1">Live</p>
-                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Cloud Sync</p>
+                    
+                    <!-- Weather Card -->
+                    <div id="weather-card" class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg flex flex-col justify-center">
+                        <div class="flex items-center gap-3 mb-1">
+                            <i id="weather-icon" class="fa-solid fa-cloud-sun text-2xl text-amber-400 weather-icon-anim"></i>
+                            <p class="text-2xl font-extrabold text-white" id="weather-temp">--°C</p>
+                        </div>
+                        <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest" id="weather-location">Loading Weather...</p>
+                    </div>
+
+                    <!-- Cloud Sync -->
+                    <div class="bg-white/5 p-8 rounded-[32px] border border-white/10 backdrop-blur-lg col-span-2 flex items-center justify-between">
+                        <div>
+                            <p class="text-xl font-extrabold text-blue-400">Secure Sync</p>
+                            <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Cloud Database Active</p>
+                        </div>
+                        <i class="fa-solid fa-shield-halved text-3xl text-zinc-700"></i>
                     </div>
                 </div>
             </div>
@@ -208,12 +223,12 @@
 
             <div class="text-center">
                 <p class="text-[13px] font-semibold opacity-90 mb-1">© 2026 National Services Hub • Official Directory</p>
-                <p class="text-[11px] font-bold opacity-40 uppercase tracking-[0.4em]">A Canva Austria GmbH brand inspiration</p>
+                <p class="text-[11px] font-bold opacity-40 uppercase tracking-[0.4em]">Official Digital Infrastructure</p>
             </div>
         </div>
     </footer>
 
-    <!-- Firebase System -->
+    <!-- Firebase & Weather System -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
@@ -238,6 +253,37 @@
             document.getElementById('date').innerText = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
         }
         setInterval(updateClock, 1000); updateClock();
+
+        // --- Weather Function ---
+        async function getLiveWeather() {
+            const locText = document.getElementById('weather-location');
+            const tempText = document.getElementById('weather-temp');
+            const icon = document.getElementById('weather-icon');
+
+            try {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+                    const data = await response.json();
+                    
+                    tempText.innerText = Math.round(data.current_weather.temperature) + "°C";
+                    locText.innerText = "Current Location";
+                    
+                    // Set Icon based on code
+                    const code = data.current_weather.weathercode;
+                    if(code === 0) icon.className = "fa-solid fa-sun text-2xl text-amber-400 weather-icon-anim";
+                    else if(code < 4) icon.className = "fa-solid fa-cloud-sun text-2xl text-amber-300 weather-icon-anim";
+                    else icon.className = "fa-solid fa-cloud text-2xl text-zinc-400 weather-icon-anim";
+                }, () => {
+                    locText.innerText = "Location Denied";
+                    tempText.innerText = "N/A";
+                });
+            } catch (e) {
+                locText.innerText = "Weather Error";
+            }
+        }
+        getLiveWeather();
 
         onValue(portalsRef, (snapshot) => {
             const data = snapshot.val();
@@ -291,17 +337,13 @@
 
             grid.innerHTML = filtered.map(p => {
                 const domain = new URL(p.url).hostname;
-                const isOfficial = domain.endsWith('.gov.in') || domain.endsWith('.gov');
                 return `
                 <div class="resource-card p-10 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-10">
                         <div class="w-16 h-16 rounded-[24px] bg-zinc-50 flex items-center justify-center p-4 border border-zinc-100">
                             <img src="https://www.google.com/s2/favicons?domain=${domain}&sz=128" class="w-full h-full object-contain">
                         </div>
-                        <div class="flex flex-col items-end gap-2">
-                            <span class="text-[9px] font-black uppercase text-indigo-600 bg-indigo-50 px-4 py-2 rounded-xl">${p.category}</span>
-                            ${isOfficial ? `<span class="text-[8px] font-bold text-emerald-600 uppercase"><i class="fa-solid fa-shield-check"></i> Official</span>` : ''}
-                        </div>
+                        <span class="text-[9px] font-black uppercase text-indigo-600 bg-indigo-50 px-4 py-2 rounded-xl">${p.category}</span>
                     </div>
                     <h3 class="brand-font text-2xl font-bold text-zinc-900 mb-4 tracking-tight">${p.name}</h3>
                     <p class="text-sm text-zinc-500 line-clamp-3 mb-10 leading-relaxed">${p.desc}</p>
